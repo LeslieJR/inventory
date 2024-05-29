@@ -21,44 +21,44 @@ def main():
     while True:
         command = input("\nEnter command (add, get, update, delete, list, plot, exit): ").strip().lower()
 
-        if command == "add":
-            name = input("Enter item name: ").strip()
-            quantity = int(input("Enter item quantity: ").strip())
-            price = float(input("Enter item price: ").strip())
-            inventory.add_product(Product(name, quantity, price))
+        match command:
+            case "add":
+                name = input("Enter item name: ").strip()
+                quantity = int(input("Enter item quantity: ").strip())
+                price = float(input("Enter item price: ").strip())
+                inventory.add_product(Product(name, quantity, price))
 
-        elif command == "get":
-            name = input("Enter item name: ").strip()
-            inventory.get_product(name)
+            case "get":
+                name = input("Enter item name: ").strip()
+                inventory.get_product(name)
 
-        elif command == "update":
-            name = input("Enter item name: ").strip()
-            quantity = int(input("Enter new item quantity: ").strip())
-            price = float(input("Enter new item price: ").strip())
-            inventory.update_product(Product(name, quantity, price))
+            case "update":
+                name = input("Enter item name: ").strip()
+                quantity = int(input("Enter new item quantity: ").strip())
+                price = float(input("Enter new item price: ").strip())
+                inventory.update_product(Product(name, quantity, price))
 
-        elif command == "delete":
-            name = input("Enter item name to delete: ").strip()
-            inventory.delete_product(name)
+            case "delete":
+                name = input("Enter item name to delete: ").strip()
+                inventory.delete_product(name)
            
-        elif command == "list":
-            inventory.list_inventory()
+            case "list":
+                inventory.list_inventory()
 
-        elif command == "plot":
-            plot_name = input("\nEnter plot name (level or value): ").strip()
-            if plot_name == 'level':
-                plot_inventory_levels(inventory)
-            elif plot_name == 'value':
-                plot_inventory_value(inventory)
-            else:
-               print("Invalid plot name. Please try again.") 
-
-        elif command == "exit":
-            print("Exiting the program.")
-            break
-
-        else:
-            print("Invalid command. Please try again.")
+            case "plot":
+                plot_name = input("\nEnter plot name (level or value): ").strip()
+                match plot_name:
+                    case 'level':
+                        plot_inventory_levels(inventory)
+                    case 'value':
+                        plot_inventory_value(inventory)
+                    case _:
+                       print("Invalid plot name. Please try again.")
+            case "exit":
+                print("Exiting the program.")
+                break
+            case _:
+                print("Invalid command. Please try again.")
 
 if __name__ == "__main__":
     main()
